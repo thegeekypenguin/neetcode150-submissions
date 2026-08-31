@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        /* Brute force - O(N)
+        int n= nums.size();
+        int temp=nums[0];
+        nums.push_back(1e9);
+        for( int i=1; i< n; i++ ){
+            if( nums[i]<nums[i+1] && nums[i] <nums[i-1])
+                temp= nums[i];
+        }
+
+        return temp;
+        */
+                int res = nums[0];
+        int l = 0;
+        int r = nums.size() - 1;
+
+        while (l <= r) {
+            if (nums[l] < nums[r]) {
+                res = min(res, nums[l]);
+                break;
+            }
+            int m = l + (r - l) / 2;
+            res = min(res, nums[m]);
+
+            if (nums[m] >= nums[l]) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
+        return res;
+    }
+};
